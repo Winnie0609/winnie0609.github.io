@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -119,4 +119,135 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* ✨ Theme Transition Animations */
+html {
+  transition: color-scheme 0.3s ease-in-out;
+}
+
+body {
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* Animate all elements that use CSS variables */
+*,
+*::before,
+*::after {
+  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out,
+    color 0.3s ease-in-out, fill 0.3s ease-in-out, stroke 0.3s ease-in-out;
+}
+
+/* Smooth transitions for common UI elements */
+nav,
+header,
+footer,
+main,
+section,
+article,
+aside {
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out,
+    border-color 0.3s ease-in-out;
+}
+
+/* Code block styles for rehype-pretty-code */
+pre {
+  overflow-x: auto;
+  padding: 1rem 0;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease-in-out; /* Animate code blocks too */
+}
+
+pre code {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+pre [data-line] {
+  padding: 0 1rem;
+}
+
+/* Dual theme support - rehype-pretty-code automatically generates these variables */
+code[data-theme*=' '],
+code[data-theme*=' '] span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+@media (prefers-color-scheme: dark) {
+  code[data-theme*=' '],
+  code[data-theme*=' '] span {
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg);
+  }
+}
+
+/* Manual dark mode toggle support */
+.dark code[data-theme*=' '],
+.dark code[data-theme*=' '] span {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
+}
+
+/* Line highlighting with IDs */
+pre [data-highlighted-line] {
+  background-color: rgba(59, 130, 246, 0.1); /* Default highlight */
+  border-left: 4px solid rgb(59, 130, 246);
+  margin-left: -1rem;
+  margin-right: -1rem;
+  padding-left: calc(1rem - 4px);
+  transition: background-color 0.3s ease-in-out,
+    border-left-color 0.3s ease-in-out;
+}
+
+/* Different colors for different line IDs */
+pre [data-highlighted-line-id='a'] {
+  background-color: rgba(239, 68, 68, 0.1); /* Red */
+  border-left-color: rgb(239, 68, 68);
+}
+
+pre [data-highlighted-line-id='b'] {
+  background-color: rgba(34, 197, 94, 0.1); /* Green */
+  border-left-color: rgb(34, 197, 94);
+}
+
+/* Character/word highlighting */
+pre [data-highlighted-chars] {
+  background-color: rgba(59, 130, 246, 0.2);
+  border-radius: 0.25rem;
+  padding: 0.125rem 0.25rem;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Different colors for character IDs */
+pre [data-chars-id='v'] {
+  background-color: rgba(168, 85, 247, 0.2); /* Purple for variables */
+}
+
+pre [data-chars-id='s'] {
+  background-color: rgba(34, 197, 94, 0.2); /* Green for setters */
+}
+
+pre [data-chars-id='i'] {
+  background-color: rgba(251, 191, 36, 0.2); /* Yellow for values */
+}
+
+/* Inline code styling */
+code:not(pre code) {
+  background-color: rgb(102, 138, 209);
+  /* background-color: rgb(243 244 246); */
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* Dark mode inline code */
+.dark code:not(pre code) {
+  background-color: rgb(55 65 81);
+  color: rgb(243 244 246);
 }
