@@ -6,13 +6,15 @@ export const mdxOptions = {
       [
         rehypePrettyCode,
         {
-          theme: { light: 'snazzy-light', dark: 'github-dark' },
-          keepBackground: true, // Important for dual themes!
+          // one-light
+          theme: { light: 'catppuccin-latte', dark: 'github-dark' },
+          keepBackground: true,
           defaultLang: {
             block: 'typescript',
             inline: 'plaintext',
           },
           grid: true,
+          wordWrap: true, // Enable code wrapping for long lines
         },
       ],
     ],

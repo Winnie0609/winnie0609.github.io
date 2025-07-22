@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import readingTime from 'reading-time';
 
 const postsDirectory = path.join(process.cwd(), 'content', 'writings');
 const weekNotesDirectory = path.join(process.cwd(), 'content', 'weeknotes');
@@ -16,6 +17,7 @@ interface postsFrontmatter {
 interface postData {
   data: postsFrontmatter;
   content: string;
+  readingTime: number;
 }
 
 interface weekNotesFrontmatter {
@@ -54,7 +56,20 @@ const getPostBySlug = async (slug: string): Promise<postData> => {
   return {
     data: data as postsFrontmatter,
     content,
+    readingTime:
+      readingTime(content).minutes < 1
+        ? 1
+        : Math.ceil(readingTime(content).minutes),
   };
+};
+
+const getTags = async (): Promise<string[]> => {
+  const posts = await getPosts();
+  const tags = posts
+    .map((post) => post.data.tags)
+    .flat()
+    .filter(Boolean) as string[];
+  return [...new Set(tags)];
 };
 
 const getWeekNotes = async (): Promise<weekNoteData[]> => {
@@ -86,4 +101,83 @@ const getWeekNoteBySlug = async (slug: string): Promise<weekNoteData> => {
   };
 };
 
-export { getPosts, getPostBySlug, getWeekNotes, getWeekNoteBySlug };
+interface adjacentPosts {
+  previous: postData | null;
+  next: postData | null;
+}
+
+interface adjacentWeekNotes {
+  previous: weekNoteData | null;
+  next: weekNoteData | null;
+}
+
+const getAdjacentPosts = async (
+  currentSlug: string
+): Promise<adjacentPosts> => {
+  const allPosts = await getPosts();
+
+  // Sort posts by date (newest first, same as writings page)
+  const sortedPosts = allPosts.sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  );
+
+  const currentIndex = sortedPosts.findIndex(
+    (post) => post.data.slug === currentSlug
+  );
+
+  if (currentIndex === -1) {
+    return { previous: null, next: null };
+  }
+
+  const previousPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
+  const nextPost =
+    currentIndex < sortedPosts.length - 1
+      ? sortedPosts[currentIndex + 1]
+      : null;
+
+  return {
+    previous: previousPost,
+    next: nextPost,
+  };
+};
+
+const getAdjacentWeekNotes = async (
+  currentSlug: string
+): Promise<adjacentWeekNotes> => {
+  const allWeekNotes = await getWeekNotes();
+
+  // Sort weeknotes by date (newest first, same as weeknotes page)
+  const sortedWeekNotes = allWeekNotes.sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  );
+
+  const currentIndex = sortedWeekNotes.findIndex(
+    (weekNote) => weekNote.data.slug === currentSlug
+  );
+
+  if (currentIndex === -1) {
+    return { previous: null, next: null };
+  }
+
+  const previousWeekNote =
+    currentIndex > 0 ? sortedWeekNotes[currentIndex - 1] : null;
+  const nextWeekNote =
+    currentIndex < sortedWeekNotes.length - 1
+      ? sortedWeekNotes[currentIndex + 1]
+      : null;
+
+  return {
+    previous: previousWeekNote,
+    next: nextWeekNote,
+  };
+};
+
+export {
+  getPosts,
+  getPostBySlug,
+  getWeekNotes,
+  getWeekNoteBySlug,
+  getTags,
+  getAdjacentPosts,
+  getAdjacentWeekNotes,
+};
