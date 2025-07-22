@@ -3,7 +3,7 @@ title: React Native 報錯 - exception in phase ‘semantic analysis’ in sourc
 slug: 'exception-in-phase-semantic-analysis-in-source-unit-BuildScript-unsupported-class-file-major-version-63'
 description: 'React Native 報錯 - exception in phase ‘semantic analysis’ in source unit ‘BuildScript’ Unsupported class file major version 63'
 date: '2023-04-10'
-tags: ['react native']
+tags: ['rn']
 ---
 
 ## 遇到的問題與原因
@@ -27,7 +27,7 @@ exception in phase 'semantic analysis' in source unit '*BuildScript*' Unsupporte
 3. 將 Gradle 的版本更新為相容的版本：將 `distributionUrl` 裡的 `gradle-7.5.1-all.zip` 改為 `gradle-7.6-all.zip`（或其他相容的版本）
 4. 執行 `./gradlew clean` 命令：下載並使用新的 Gradle 版本
 
-![](images/java-compatability.png)
+![Java Compatibility Chart](/images/java-compatability.png)
 
 ## 參考資料
 

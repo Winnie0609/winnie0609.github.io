@@ -1,50 +1,173 @@
 import type { MDXComponents } from 'mdx/types';
+import Image from 'next/image';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     h1: ({ children }) => (
-      <h1 className="text-4xl font-bold mb-6 text-gray-900">{children}</h1>
+      <h1 className="text-3xl font-bold mb-6 text-content-primary">
+        {children}
+      </h1>
     ),
     h2: ({ children }) => (
-      <h2 className="text-3xl font-semibold mb-4 text-gray-800">{children}</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-content-primary">
+        {children}
+      </h2>
     ),
     h3: ({ children }) => (
-      <h3 className="text-2xl font-medium mb-3 text-gray-800">{children}</h3>
+      <h3 className="text-xl font-medium mb-3 text-content-primary">
+        {children}
+      </h3>
+    ),
+    h4: ({ children }) => (
+      <h4 className="text-lg font-medium mb-3 text-content-primary">
+        {children}
+      </h4>
+    ),
+    h5: ({ children }) => (
+      <h5 className="text-base font-medium mb-2 text-content-primary">
+        {children}
+      </h5>
+    ),
+    h6: ({ children }) => (
+      <h6 className="text-sm font-medium mb-2 text-content-primary">
+        {children}
+      </h6>
     ),
     p: ({ children }) => (
-      <p className="mb-4 text-gray-700 leading-relaxed">{children}</p>
+      <p className="mb-4 text-content-secondary leading-relaxed">{children}</p>
     ),
     strong: ({ children }) => (
-      <strong className="font-semibold text-gray-900">{children}</strong>
+      <strong className="font-semibold text-content-primary">{children}</strong>
     ),
-    em: ({ children }) => <em className="italic text-gray-700">{children}</em>,
+    em: ({ children }) => (
+      <em className="italic text-content-secondary">{children}</em>
+    ),
     blockquote: ({ children }) => (
-      <blockquote className="border-l-4 border-blue-500 pl-4 italic text-gray-600 mb-4">
+      <blockquote className="border-l-4 border-border-strong [&>p]:text-content-tertiary rounded-r-md pl-6 py-4 my-6 [&>p]:!mb-0">
         {children}
       </blockquote>
     ),
     ul: ({ children }) => (
-      <ul className="list-disc list-inside mb-4 space-y-2 text-gray-700">
+      <ul className="list-disc list-inside mb-6 space-y-2 text-content-secondary">
         {children}
       </ul>
     ),
     ol: ({ children }) => (
-      <ol className="list-decimal list-inside mb-4 space-y-2 text-gray-700">
+      <ol className="list-decimal list-inside mb-6 space-y-2 text-content-secondary">
         {children}
       </ol>
     ),
-    li: ({ children }) => <li className="mb-1">{children}</li>,
+    li: ({ children }) => (
+      <li className="mb-1 [&>p]:mb-0 [&>p:first-child]:inline leading-relaxed">
+        {children}
+      </li>
+    ),
+    img: ({ src, alt, ...props }) => {
+      // Validate src prop
+      if (!src || typeof src !== 'string') {
+        return null;
+      }
+
+      // List of configured external domains
+      const configuredDomains = [
+        'i.imgur.com',
+        'imgur.com',
+        'images.unsplash.com',
+        'cdn.jsdelivr.net',
+        'raw.githubusercontent.com',
+      ];
+
+      // Check if it's a local image (starts with /) or configured external domain
+      const isLocal = src.startsWith('/');
+      const isConfiguredExternal = configuredDomains.some((domain) =>
+        src.includes(domain)
+      );
+
+      // Use Next.js Image for local and configured external images
+      if (isLocal || isConfiguredExternal) {
+        return (
+          <Image
+            src={src}
+            alt={alt || ''}
+            width={0}
+            height={0}
+            sizes="100vw"
+            className="w-full h-auto rounded-lg max-w-4xl mx-auto my-8 block"
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+            {...props}
+          />
+        );
+      }
+
+      // Fallback to regular img for unconfigured external domains
+      return (
+        <img
+          src={src}
+          alt={alt || ''}
+          className="w-full h-auto rounded-lg border border-border-light max-w-4xl mx-auto my-8 block shadow-sm"
+          {...props}
+        />
+      );
+    },
     a: ({ href, children }) => (
       <a
         href={href}
-        className="text-blue-600 hover:text-blue-800 underline"
+        className="text-link font-medium underline text-content-secondary dark:text-content-primary dark:hover:text-link-hover dark:hover:no-underline hover:text-link-hover hover:no-underline decoration-link/60 decoration-1 underline-offset-2 transition-colors duration-200"
         target="_blank"
         rel="noopener noreferrer"
       >
         {children}
       </a>
     ),
-    hr: () => <hr className="my-8 border-gray-300" />,
+    hr: () => <hr className="my-8 border-border-medium" />,
+
+    // Table components
+    table: ({ children }) => (
+      <div className="overflow-x-auto my-6">
+        <table className="w-full border-collapse border border-border-medium rounded-lg overflow-hidden">
+          {children}
+        </table>
+      </div>
+    ),
+    thead: ({ children }) => <thead className="bg-muted">{children}</thead>,
+    tbody: ({ children }) => <tbody>{children}</tbody>,
+    tr: ({ children }) => (
+      <tr className="border-b border-border-light last:border-b-0">
+        {children}
+      </tr>
+    ),
+    th: ({ children }) => (
+      <th className="text-left text-content-primary font-semibold p-3 border-r border-border-light last:border-r-0">
+        {children}
+      </th>
+    ),
+    td: ({ children }) => (
+      <td className="text-content-secondary p-3 border-r border-border-light last:border-r-0">
+        {children}
+      </td>
+    ),
+
+    // Additional semantic elements
+    mark: ({ children }) => (
+      <mark className="bg-warning/20 text-content-primary px-1 rounded">
+        {children}
+      </mark>
+    ),
+    kbd: ({ children }) => (
+      <kbd className="bg-muted text-content-primary px-2 py-1 text-sm rounded border border-border-medium font-mono">
+        {children}
+      </kbd>
+    ),
+    del: ({ children }) => (
+      <del className="text-content-tertiary line-through">{children}</del>
+    ),
+    ins: ({ children }) => (
+      <ins className="text-content-primary no-underline bg-success/10 px-1 rounded">
+        {children}
+      </ins>
+    ),
+
     ...components,
   };
 }
