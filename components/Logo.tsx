@@ -1,23 +1,29 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { isValidLocale } from '@/lib/i18n';
+import Image from 'next/image';
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 
 const Logo = () => {
-  const pathname = usePathname();
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
-  // 检测当前语言
-  const segments = pathname.split('/').filter(Boolean);
-  const currentLocale =
-    segments.length > 0 && isValidLocale(segments[0]) ? segments[0] : null;
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-  // 如果在多语言路由下，链接到对应语言的首页
-  const homeHref = currentLocale ? `/${currentLocale}` : '/zh';
+  // avoid hydration mismatch
+  const logoPath =
+    mounted && resolvedTheme === 'dark'
+      ? '/images/logo-white.png'
+      : '/images/logo.png';
 
   return (
-    <div>
-      <Link href={homeHref}>wthex</Link>
+    <div className="text-content-primary">
+      <Link href="/">
+        <Image src={logoPath} alt="logo" width={30} height={30} />
+      </Link>
     </div>
   );
 };

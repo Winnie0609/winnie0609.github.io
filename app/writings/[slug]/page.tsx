@@ -1,8 +1,9 @@
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import MDXContent from '@/components/MDXContent';
-import { getPostBySlug, getAdjacentPosts } from '@/lib/post';
+import MDXContentServer from '@/components/MDXContentServer';
+import { getPostBySlug, getAdjacentPosts, getPosts } from '@/lib/post';
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
+import { Metadata } from 'next';
 
 interface PageProps {
   params: { slug: string };
@@ -22,7 +23,7 @@ const WritingPostPage = async ({ params }: PageProps) => {
     }
 
     return (
-      <>
+      <div className="mt-10">
         <h1 className="text-3xl font-bold max-w-4xl">{postData.data.title}</h1>
 
         <div className="flex flex-row gap-2 mt-2 border-b border-border-light pb-4">
@@ -37,7 +38,7 @@ const WritingPostPage = async ({ params }: PageProps) => {
         </div>
 
         <article className="max-w-4xl mx-auto py-8">
-          <MDXContent source={postData.content} />
+          <MDXContentServer source={postData.content} />
         </article>
 
         {/* Navigation to next and previous articles */}
@@ -74,7 +75,7 @@ const WritingPostPage = async ({ params }: PageProps) => {
             )}
           </div>
         </div>
-      </>
+      </div>
     );
   } catch (error) {
     console.log('error', error);
@@ -84,7 +85,52 @@ const WritingPostPage = async ({ params }: PageProps) => {
 
 export default WritingPostPage;
 
-export const metadata = {
-  title: 'Writing Post',
-  description: 'Writing Post',
-};
+// Generate static params for all posts
+export async function generateStaticParams() {
+  const posts = await getPosts();
+  return posts.map((post) => ({
+    slug: post.data.slug,
+  }));
+}
+
+// Generate dynamic metadata for each post
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  try {
+    const resolvedParams = await params;
+    const postData = await getPostBySlug(resolvedParams.slug);
+
+    if (!postData) {
+      return {
+        title: 'Post Not Found',
+        description: 'The requested post could not be found.',
+      };
+    }
+
+    return {
+      title: postData.data.title,
+      description:
+        postData.data.description || `Read about ${postData.data.title}`,
+      openGraph: {
+        title: postData.data.title,
+        description:
+          postData.data.description || `Read about ${postData.data.title}`,
+        type: 'article',
+        publishedTime: postData.data.date,
+        tags: postData.data.tags,
+      },
+      twitter: {
+        card: 'summary',
+        title: postData.data.title,
+        description:
+          postData.data.description || `Read about ${postData.data.title}`,
+      },
+    };
+  } catch (error) {
+    return {
+      title: 'Writing Post',
+      description: 'Writing Post',
+    };
+  }
+}

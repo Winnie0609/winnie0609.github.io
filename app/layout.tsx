@@ -3,7 +3,10 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import NextTopLoader from 'nextjs-toploader';
 import './globals.css';
 import NavigationBar from '@/components/NavigationBar';
+import Footer from '@/components/Footer';
 import { ThemeProvider } from '@/components/theme-provider';
+import { LanguageProvider } from '@/components/LanguageProvider';
+import ConsoleEasterEgg from '@/components/ConsoleEasterEgg';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -28,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-3xl mx-auto px-4 md:py-16 py-8`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-3xl mx-auto px-4 md:py-16 py-8 min-h-screen flex flex-col`}
         suppressHydrationWarning
       >
         <NextTopLoader
@@ -43,8 +46,12 @@ export default function RootLayout({
           shadow={false}
         />
         <ThemeProvider>
-          <NavigationBar />
-          {children}
+          <LanguageProvider>
+            <ConsoleEasterEgg />
+            <NavigationBar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

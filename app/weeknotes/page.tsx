@@ -58,7 +58,7 @@ const WeekNotePage = async () => {
                     <Link
                       key={weekNote.data.slug}
                       href={`/weeknotes/${weekNote.data.slug}`}
-                      className="group block px-8 py-4 text-center duration-200 rounded-lg"
+                      className="group block px-8 py-4 text-center duration-200 rounded-lg text-content-primary"
                     >
                       <div className="space-y-4">
                         <h2 className="text-2xl font-bold group-hover:text-primary transition-colors">

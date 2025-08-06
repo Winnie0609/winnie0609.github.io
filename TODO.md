@@ -1,5 +1,10 @@
 # Blog Development TODO
 
+中文字體需要 embed
+
+## Note
+- 之後要把顏色在 css 管理 primary / secondary 之類的 不然要換顏色很麻煩
+
 ## Project Setup
 
 - [x] Setup shadcn/ui with Next.js and Tailwind CSS, configure theme for clean light mode design with dark mode toggle

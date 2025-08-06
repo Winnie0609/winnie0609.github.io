@@ -1,0 +1,62 @@
+.flip-text-container {
+  font-size: inherit;
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.tick-flip,
+.tick-text-inline {
+  font-size: inherit;
+}
+
+.tick-label {
+  margin-top: 1em;
+  font-size: 1em;
+  color: #595d63 !important;
+}
+
+.tick-char {
+  width: 1.5em;
+}
+
+.tick-text-inline {
+  display: inline-block;
+  text-align: center;
+  min-width: 1em;
+  color: #595d63 !important;
+}
+
+.tick-text-inline + .tick-text-inline {
+  margin-left: -0.325em;
+}
+
+.tick-group {
+  margin: 0 0.5em;
+  text-align: center;
+}
+
+.tick-flip-panel {
+  color: #fff !important;
+  background-color: #3c3e3c !important;
+}
+
+.tick-flip {
+  border-radius: 0.12em !important;
+}
+
+.tick-flip-panel-text-wrapper {
+  line-height: 1.45 !important;
+}
+
+/* Flexible container styling */
+.flip-text-container {
+  display: inline-block;
+  position: relative;
+}
+
+/* Optional dark theme class */
+.flip-text-container.dark-theme {
+  background-color: rgb(0, 0, 0);
+  padding: 2rem;
+  border-radius: 0.5rem;
+}

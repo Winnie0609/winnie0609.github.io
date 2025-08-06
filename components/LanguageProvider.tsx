@@ -1,28 +1,39 @@
 'use client';
 
-import { createContext, useContext, ReactNode } from 'react';
-import { Locale, getTranslations } from '@/lib/i18n';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+
+type Language = 'en' | 'zh';
 
 interface LanguageContextType {
-  locale: Locale;
-  t: ReturnType<typeof getTranslations>;
+  language: Language;
+  setLanguage: (language: Language) => void;
+  mounted: boolean;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(
   undefined
 );
 
-export function LanguageProvider({
-  children,
-  locale,
-}: {
-  children: ReactNode;
-  locale: Locale;
-}) {
-  const t = getTranslations(locale);
+export function LanguageProvider({ children }: { children: React.ReactNode }) {
+  const [language, setLanguageState] = useState<Language>('zh');
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // Load language from localStorage
+    const savedLanguage = localStorage.getItem('blog-language') as Language;
+    if (savedLanguage) {
+      setLanguageState(savedLanguage);
+    }
+    setMounted(true);
+  }, []);
+
+  const setLanguage = (newLanguage: Language) => {
+    setLanguageState(newLanguage);
+    localStorage.setItem('blog-language', newLanguage);
+  };
 
   return (
-    <LanguageContext.Provider value={{ locale, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage, mounted }}>
       {children}
     </LanguageContext.Provider>
   );

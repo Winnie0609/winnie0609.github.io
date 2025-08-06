@@ -1,9 +1,10 @@
-import { MDXRemote } from 'next-mdx-remote/rsc';
+'use client';
+
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { useMDXComponents } from '@/mdx-components';
-import { mdxOptions } from '@/lib/mdx-config';
 
 interface MDXContentProps {
-  source: string;
+  source: MDXRemoteSerializeResult;
   className?: string;
 }
 
@@ -15,11 +16,7 @@ export default function MDXContent({
 
   return (
     <div className={className}>
-      <MDXRemote
-        source={source}
-        components={components}
-        options={mdxOptions as any}
-      />
+      <MDXRemote {...source} components={components} />
     </div>
   );
 }

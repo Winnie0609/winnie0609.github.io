@@ -1,12 +1,13 @@
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import MDXContent from '@/components/MDXContent';
+import MDXContentServer from '@/components/MDXContentServer';
 import {
   getWeekNoteBySlug,
   getWeekNotes,
   getAdjacentWeekNotes,
 } from '@/lib/post';
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
+import { Metadata } from 'next';
 
 interface PageProps {
   params: { slug: string };
@@ -27,7 +28,7 @@ const WeekNotePostPage = async ({ params }: PageProps) => {
     }
 
     return (
-      <>
+      <div className="mt-10">
         <h1 className="text-3xl font-bold max-w-4xl">#{weekNumber}</h1>
 
         <div className="flex flex-row gap-2 mt-2 border-b border-border-light pb-4">
@@ -43,7 +44,7 @@ const WeekNotePostPage = async ({ params }: PageProps) => {
         </div>
 
         <article className="max-w-4xl mx-auto py-8">
-          <MDXContent source={weekNoteData.content} />
+          <MDXContentServer source={weekNoteData.content} />
         </article>
 
         {/* Navigation to next and previous weeknotes */}
@@ -80,7 +81,7 @@ const WeekNotePostPage = async ({ params }: PageProps) => {
             )}
           </div>
         </div>
-      </>
+      </div>
     );
   } catch (error) {
     console.log('error', error);
@@ -98,7 +99,42 @@ export async function generateStaticParams() {
   }));
 }
 
-export const metadata = {
-  title: 'WeekNote',
-  description: 'WeekNote',
-};
+// Generate dynamic metadata for each weeknote
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  try {
+    const resolvedParams = await params;
+    const weekNoteData = await getWeekNoteBySlug(resolvedParams.slug);
+    const weekNumber = weekNoteData.data.slug.match(/week-(\d+)/)?.[1];
+    
+    if (!weekNoteData) {
+      return {
+        title: 'WeekNote Not Found',
+        description: 'The requested weeknote could not be found.',
+      };
+    }
+
+    const title = `#${weekNumber}`;
+    const description = weekNoteData.data.description || `Week ${weekNumber} notes and thoughts`;
+
+    return {
+      title,
+      description,
+      openGraph: {
+        title,
+        description,
+        type: 'article',
+        publishedTime: weekNoteData.data.date,
+      },
+      twitter: {
+        card: 'summary',
+        title,
+        description,
+      },
+    };
+  } catch (error) {
+    return {
+      title: 'WeekNote',
+      description: 'WeekNote',
+    };
+  }
+}

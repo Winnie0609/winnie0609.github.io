@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import TagFilter from '@/components/TagFilter';
-
 interface PostData {
   data: {
     title: string;

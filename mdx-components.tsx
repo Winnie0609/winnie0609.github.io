@@ -1,5 +1,6 @@
 import type { MDXComponents } from 'mdx/types';
 import Image from 'next/image';
+import { ImageRow } from './components/ImageRow';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -58,7 +59,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </ol>
     ),
     li: ({ children }) => (
-      <li className="mb-1 [&>p]:mb-0 [&>p:first-child]:inline leading-relaxed">
+      <li className="mb-1 [&>p]:mb-0 [&>p:first-child]:inline leading-relaxed text-content-secondary">
         {children}
       </li>
     ),
@@ -92,9 +93,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
             width={0}
             height={0}
             sizes="100vw"
-            className="w-full h-auto rounded-lg max-w-4xl mx-auto my-8 block"
-            placeholder="blur"
-            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+            className="w-full h-auto rounded-sm max-w-4xl mx-auto my-8 block"
             {...props}
           />
         );
@@ -113,7 +112,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     a: ({ href, children }) => (
       <a
         href={href}
-        className="text-link font-medium underline text-content-secondary dark:text-content-primary dark:hover:text-link-hover dark:hover:no-underline hover:text-link-hover hover:no-underline decoration-link/60 decoration-1 underline-offset-2 transition-colors duration-200"
+        className="text-link font-medium underline text-content-tertiary dark:text-content-primary dark:hover:text-link-hover dark:hover:no-underline hover:text-link-hover hover:no-underline decoration-link/60 decoration-1 underline-offset-2 transition-colors duration-200"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -130,10 +129,14 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         </table>
       </div>
     ),
-    thead: ({ children }) => <thead className="bg-muted">{children}</thead>,
-    tbody: ({ children }) => <tbody>{children}</tbody>,
+    thead: ({ children }) => (
+      <thead className="bg-muted text-content-primary">{children}</thead>
+    ),
+    tbody: ({ children }) => (
+      <tbody className="text-content-secondary">{children}</tbody>
+    ),
     tr: ({ children }) => (
-      <tr className="border-b border-border-light last:border-b-0">
+      <tr className="border-b border-border-light last:border-b-0 text-content-secondary">
         {children}
       </tr>
     ),
@@ -167,6 +170,15 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {children}
       </ins>
     ),
+    b: ({ children }) => (
+      <b className="font-semibold text-content-primary">{children}</b>
+    ),
+    i: ({ children }) => (
+      <i className="italic text-content-secondary">{children}</i>
+    ),
+
+    // Custom components
+    ImageRow,
 
     ...components,
   };
