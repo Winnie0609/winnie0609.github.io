@@ -7,7 +7,7 @@ export async function GET() {
 
     // Count posts for each tag
     const tagCounts: Record<string, number> = {};
-    posts.forEach((post: any) => {
+    posts.forEach((post: { data: { tags?: string[] } }) => {
       if (post.data.tags) {
         post.data.tags.forEach((tag: string) => {
           tagCounts[tag] = (tagCounts[tag] || 0) + 1;

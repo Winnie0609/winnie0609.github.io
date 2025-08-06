@@ -6,8 +6,8 @@ import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
 import { Metadata } from 'next';
 
 interface PageProps {
-  params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 const WritingPostPage = async ({ params }: PageProps) => {
@@ -77,8 +77,9 @@ const WritingPostPage = async ({ params }: PageProps) => {
         </div>
       </div>
     );
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    console.log('error', error);
+    // console.log('error', error);
     redirect('/writings');
   }
 };
@@ -127,7 +128,9 @@ export async function generateMetadata({
           postData.data.description || `Read about ${postData.data.title}`,
       },
     };
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
+    // console.log('error', error);
     return {
       title: 'Writing Post',
       description: 'Writing Post',

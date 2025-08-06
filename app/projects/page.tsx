@@ -1,28 +1,28 @@
 'use client';
 
-import LanguageSwitch from '@/components/LanguageSwitch';
-import { useLanguage } from '@/components/LanguageProvider';
+// import LanguageSwitch from '@/components/LanguageSwitch';
+// import { useLanguage } from '@/components/LanguageProvider';
 
 // Define content for both languages
-const content = {
-  zh: {
-    title: '專案',
-    description: '我參與過的專案和貢獻',
-    subtitle: '這裡是我參與過的一些專案。',
-    projects: [],
-  },
-  en: {
-    title: 'Projects',
-    description: 'Projects I have participated in and contributed to',
-    subtitle: 'Here are some projects I have been involved in.',
-    projects: [],
-  },
-};
+// const content = {
+//   zh: {
+//     title: '專案',
+//     description: '我參與過的專案和貢獻',
+//     subtitle: '這裡是我參與過的一些專案。',
+//     projects: [],
+//   },
+//   en: {
+//     title: 'Projects',
+//     description: 'Projects I have participated in and contributed to',
+//     subtitle: 'Here are some projects I have been involved in.',
+//     projects: [],
+//   },
+// };
 
 export default function Projects() {
-  const { language: currentLanguage } = useLanguage();
+  // const { language: currentLanguage } = useLanguage();
 
-  const currentContent = content[currentLanguage];
+  // const currentContent = content[currentLanguage];
 
   return (
     <div>

@@ -10,8 +10,8 @@ import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
 import { Metadata } from 'next';
 
 interface PageProps {
-  params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 const WeekNotePostPage = async ({ params }: PageProps) => {
@@ -83,8 +83,9 @@ const WeekNotePostPage = async ({ params }: PageProps) => {
         </div>
       </div>
     );
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    console.log('error', error);
+    // console.log('error', error);
     redirect('/weeknotes');
   }
 };
@@ -100,12 +101,14 @@ export async function generateStaticParams() {
 }
 
 // Generate dynamic metadata for each weeknote
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   try {
     const resolvedParams = await params;
     const weekNoteData = await getWeekNoteBySlug(resolvedParams.slug);
     const weekNumber = weekNoteData.data.slug.match(/week-(\d+)/)?.[1];
-    
+
     if (!weekNoteData) {
       return {
         title: 'WeekNote Not Found',
@@ -114,7 +117,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     }
 
     const title = `#${weekNumber}`;
-    const description = weekNoteData.data.description || `Week ${weekNumber} notes and thoughts`;
+    const description =
+      weekNoteData.data.description || `Week ${weekNumber} notes and thoughts`;
 
     return {
       title,
@@ -131,7 +135,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         description,
       },
     };
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
+    // console.log('error', error);
     return {
       title: 'WeekNote',
       description: 'WeekNote',

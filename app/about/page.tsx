@@ -40,7 +40,9 @@ export default function AboutPage() {
             寫寫文章以及週記，關於學習、關於愛、關於生活碎片，以及腦袋中亂七八糟的想法。
           </p>
           <p className="mb-4 text-content-secondary leading-relaxed">
-            關注有趣新奇的事物。一個異鄉人，來自 3°08'52"N 101°41'43"E, 目前住在 25°02'15"N 121°33'45"E。 
+            關注有趣新奇的事物。一個異鄉人，來自 3°08&apos;52&quot;N
+            101°41&apos;43&quot;E, 目前住在 25°02&apos;15&quot;N
+            121°33&apos;45&quot;E。
           </p>
         </div>
       </div>

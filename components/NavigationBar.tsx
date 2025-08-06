@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import Logo from './Logo';
 import ModeToggle from './ModeToggle';
-import { useLanguage } from './LanguageProvider';
+// import { useLanguage } from './LanguageProvider';
 
 const NavigationBar = () => {
   const [isToggleOpen, setToggleOpen] = useState(false);

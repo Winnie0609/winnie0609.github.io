@@ -18,6 +18,7 @@ export default function MDXContentServer({
       <MDXRemote
         source={source}
         components={components}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         options={mdxOptions as any}
       />
     </div>
