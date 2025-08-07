@@ -81,7 +81,7 @@ const WritingPage = () => {
           <div key={year} className="relative">
             {/* Year header - large and semi-transparent behind content */}
             <div className="absolute pl-5 -top-5 -left-5 -z-10">
-              <h2 className="text-8xl font-bold text-muted-foreground/30 opacity-50 select-none">
+              <h2 className="text-8xl font-bold text-muted-foreground/30 opacity-10 select-none">
                 {year}
               </h2>
             </div>

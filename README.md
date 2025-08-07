@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Winnie's Blog
 
-## Getting Started
+A personal blog built with Next.js, featuring writings, weeknotes, and projects.
+基於 Next.js 構建的個人部落格，包含文章、週記和專案展示。
 
-First, run the development server:
+## Tech Stack ｜技術
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Framework 框架**: Next.js 14 with App Router
+- **Styling 樣式**: Tailwind CSS
+- **Content 內容**: MDX for markdown processing
+- **Language 語言**: TypeScript
+- **Deployment 部署**: Vercel
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features ｜功能
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- 📝 Writing posts with MDX support ｜支援 MDX 的文章撰寫
+- 📅 Weekly notes and updates ｜週記和更新
+- 🏗️ Project showcase ｜專案展示
+- 🌙 Dark/Light mode toggle ｜深色/淺色模式切換
+- 🌐 Multi-language support (planned)｜多語言支援（規劃中）
+- 📱 Responsive design ｜響應式設計
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## TODO ｜待辦事項
 
-## Learn More
+- [ ] 搬運舊文章到新的 blog ｜ Migrate old articles to new blog system
+- [ ] 整理 projects 頁面內容｜ Organize projects page content
+- [ ] 完善多語言系統架構｜ Improve multi-language system architecture
+- [ ] 實作搜尋功能｜ Implement search functionality
 
-To learn more about Next.js, take a look at the following resources:
+### Technical Optimization ｜技術優化
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [ ] 添加 SEO 優化｜ Add SEO optimization
+- [ ] 實作 RSS feed ｜ Implement RSS feed
+- [ ] 改善載入效能｜ Improve loading performance
+- [ ] 添加分析工具｜ Add analytics tools
