@@ -14,9 +14,9 @@ Jul 21 - 29
 
 斷斷續續看了一些書，有些不是這週看的，也一併記進來吧。不是那種看完一本書才會開新的書的人，總是同時有好幾本書正在看，而且很多書也會看著看著就不看了。
 
-- 塊肉餘生記 David Copperfield / 查爾斯·狄更斯
-- 沈睡的殺手 Anna O / Matthew Blake
-- 感情百物 / 張亦絢 [ING]
+- 塊肉餘生記 David Copperfield｜查爾斯·狄更斯
+- 沈睡的殺手 Anna O｜Matthew Blake
+- 感情百物｜張亦絢 [ING]
 - Rewire-神經可塑性：用神經科學突破行為模式迴圈，終結焦慮、恐慌和憂鬱，實現最佳的心理健康 [ING]
 
 ## Podcast
