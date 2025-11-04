@@ -4,6 +4,8 @@ date: '2025-10-05'
 slug: 'week-20'
 ---
 
+Sep 28 - Oct 01
+
 ## 書
 
 - 倒數 10 分又 38 秒 ｜艾莉芙．夏法克
@@ -22,9 +24,9 @@ slug: 'week-20'
 
 ## Podcast
 
-[台灣通勤第一品牌｜EP491 DESERVE ft.Gummy B](https://open.spotify.com/episode/5Rd80moU6fQ8u7FNfgKKR1)
+[台灣通勤第一品牌｜ EP491 DESERVE ft.Gummy B](https://open.spotify.com/episode/5Rd80moU6fQ8u7FNfgKKR1)
 
-[好味小姐開束縛我還你原形｜EP280 阿姨你好我是ＯＯ的男朋友😬😬😬](https://open.spotify.com/episode/2c4omvJXF0be7zk0CJGD9L)
+[好味小姐開束縛我還你原形｜ EP280 阿姨你好我是ＯＯ的男朋友 😬😬😬](https://open.spotify.com/episode/2c4omvJXF0be7zk0CJGD9L)
 
 不熟悉 Gummy B 也不熟悉嘻哈，這集聊到了他的成長歷程，住在敦化南路考上台大，人生一直都是順順的，哪有什麼 Struggle 或是要解決的問題，很多人是這樣說的。每個人都有自己要解決的課題吧，每個人的痛苦都是真實的。好像稍微可以理解這個狀況，因為截止目前為止的人生都還算是順遂，念了一個不錯的學校、從事一個不錯的職業、住在一個不錯的地方，偶爾擔心我的抱怨看起來會是炫耀或是無病呻吟。當我看見信用卡帳單、無力的異鄉人身分、總是困頓焦慮，我知道我的痛苦也是真實的。你的我的地獄都是真實的。
 
