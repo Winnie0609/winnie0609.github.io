@@ -89,6 +89,12 @@ export default function AboutPage() {
             前端架構設計, 效能優化, A/B 測試, Serverless, AI/LLM 應用
           </strong>
         </p>
+        <p className="mb-2 text-content-secondary leading-relaxed">
+          Testing Tools:{' '}
+          <strong className="font-semibold text-content-primary">
+            Vitest,Playwright
+          </strong>
+        </p>
       </div>
 
       <hr className="my-4 border-border-medium" />

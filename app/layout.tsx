@@ -7,6 +7,7 @@ import Footer from '@/components/Footer';
 import { ThemeProvider } from '@/components/theme-provider';
 import { LanguageProvider } from '@/components/LanguageProvider';
 import ConsoleEasterEgg from '@/components/ConsoleEasterEgg';
+import Script from 'next/script';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -53,6 +54,13 @@ export default function RootLayout({
             <Footer />
           </LanguageProvider>
         </ThemeProvider>
+
+        <Script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="6a217a92-505e-4190-8aef-c9110f1bd8d0"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

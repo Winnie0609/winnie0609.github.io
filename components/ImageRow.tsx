@@ -6,11 +6,14 @@ interface ImageRowProps {
     alt: string;
   }>;
   gap?: number;
+  className?: string;
 }
 
-export function ImageRow({ images, gap = 4 }: ImageRowProps) {
+export function ImageRow({ images, gap = 4, className }: ImageRowProps) {
   return (
-    <div className={`flex gap-${gap} my-8 flex-col sm:flex-row`}>
+    <div
+      className={`flex gap-${gap} my-8 flex-col sm:flex-row ${className || ''}`}
+    >
       {images.map((image, index) => (
         <div key={index} className="flex-1">
           <Image
