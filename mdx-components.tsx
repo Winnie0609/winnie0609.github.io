@@ -49,17 +49,17 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </blockquote>
     ),
     ul: ({ children }) => (
-      <ul className="list-disc list-inside mb-6 space-y-2 text-content-secondary">
+      <ul className="nested-list-ul list-disc mb-4 space-y-0.5 text-content-secondary">
         {children}
       </ul>
     ),
     ol: ({ children }) => (
-      <ol className="list-decimal list-inside mb-6 space-y-2 text-content-secondary">
+      <ol className="nested-list-ol list-decimal mb-4 space-y-0.5 text-content-secondary">
         {children}
       </ol>
     ),
     li: ({ children }) => (
-      <li className="mb-1 [&>p]:mb-0 [&>p:first-child]:inline leading-relaxed text-content-secondary">
+      <li className="nested-list-li mb-0 [&>p]:mb-0 [&>p:first-child]:inline leading-relaxed text-content-secondary">
         {children}
       </li>
     ),

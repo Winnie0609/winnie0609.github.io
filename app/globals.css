@@ -355,6 +355,56 @@ tr:last-child td {
   border-bottom: none;
 }
 
+/* Nested List Styles*/
+.nested-list-ul,
+.nested-list-ol {
+  list-style-position: outside;
+  padding-left: 1.75rem;
+  margin-left: 0;
+  position: relative;
+}
+
+.nested-list-li {
+  position: relative;
+  padding-left: 0.5rem;
+  margin-left: 0;
+  padding-bottom: 0.125rem;
+}
+
+/* Nested list indentation - support up to 3+ levels */
+.nested-list-ul .nested-list-ul,
+.nested-list-ol .nested-list-ol {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding-left: 1.75rem;
+  margin-left: 0;
+}
+
+.nested-list-ul .nested-list-ul .nested-list-ul,
+.nested-list-ol .nested-list-ol .nested-list-ol {
+  padding-left: 1.75rem;
+  margin-left: 0;
+}
+
+.nested-list-ul .nested-list-ul .nested-list-ul .nested-list-ul,
+.nested-list-ol .nested-list-ol .nested-list-ol .nested-list-ol {
+  padding-left: 1.75rem;
+  margin-left: 0;
+}
+
+/* Different bullet styles for nested levels */
+.nested-list-ul .nested-list-ul {
+  list-style-type: circle;
+}
+
+.nested-list-ul .nested-list-ul .nested-list-ul {
+  list-style-type: square;
+}
+
+.nested-list-ul .nested-list-ul .nested-list-ul .nested-list-ul {
+  list-style-type: disc;
+}
+
 /* Horizontal Rule */
 hr {
   @apply border-border-medium;
